@@ -72,10 +72,10 @@ if not hasattr(my_electric_car, "working_engine"):
     raise NotImplementedError("Where is 'working_engine' attribute of 'my_electric_car' object?")
 
 if not isinstance(my_electric_car.working_engine, str):
-    raise TypeError("'working_engine' attribute for electric car should be of type 'str'")
+    raise TypeError("'start_engine' or 'stop_engine' were not called")
 
 if my_electric_car.working_engine != "Yes":
-    raise Warning("'my_electric_car' has not been started.")
+    raise Warning("'my_electric_car' has not been started")
 
 if not "my_electric_car2" in USER_GLOBAL:
     raise NotImplementedError("Where is 'my_electric_car2'?")
@@ -107,10 +107,10 @@ if not hasattr(my_electric_car2, "working_engine"):
     raise NotImplementedError("Where is 'working_engine' attribute of 'my_electric_car2' object?")
 
 if not isinstance(my_electric_car2.working_engine, str):
-    raise TypeError("'working_engine' attribute for electric car should be of type 'str'")
+    raise TypeError("'start_engine' or 'stop_engine' were not called")
 
 if my_electric_car2.working_engine != "No":
-    raise Warning("'my_electric_car2' has not been stopped.")
+    raise Warning("'my_electric_car2' has not been stopped")
 """
 
 run_test = """
