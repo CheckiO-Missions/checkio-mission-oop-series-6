@@ -164,7 +164,7 @@ if not hasattr(my_electric_car, "working_engine"):
 
 
 if not isinstance(my_electric_car.working_engine, str):
-    raise TypeError("'start_engine' or 'stop_engine' were not overridden or called")
+    raise TypeError("'start_engine' was not overridden or called for 'my_electric_car'")
 
 if my_electric_car.working_engine != "Yes":
     raise Warning("'my_electric_car' has not been started")
