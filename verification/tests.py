@@ -241,20 +241,20 @@ with contextlib.redirect_stdout(io.StringIO()) as stdout:
                      show_code='''(test_car := Car()).start_engine()
     test_car.stop_engine()'''),
         
-        prepare_test(middle_code='''test_car = ElectricCar()''',
+        prepare_test(middle_code='''test_car = ElectricCar(30)''',
                      test="test_car.working_engine",
                      answer=False,
-                     show_code="test_car = ElectricCar()"),
+                     show_code="test_car = ElectricCar(30)"),
         prepare_test(middle_code='''with contextlib.redirect_stdout(io.StringIO()) as stdout:
-    (test_car := ElectricCar()).start_engine()''',
+    (test_car := ElectricCar(30)).start_engine()''',
                      test="test_car.working_engine, stdout.getvalue()",
                      answer=["Yes", "Electric motor has started\n"],
-                     show_code="(test_car := ElectricCar()).start_engine()"),
+                     show_code="(test_car := ElectricCar(30)).start_engine()"),
         prepare_test(middle_code='''with contextlib.redirect_stdout(io.StringIO()) as stdout:
-    (test_car := ElectricCar()).start_engine()
+    (test_car := ElectricCar(30)).start_engine()
     test_car.stop_engine()''',
                      test="test_car.working_engine, stdout.getvalue()",
                      answer=["No", "Electric motor has started\nElectric motor has stopped\n"],
-                     show_code='''(test_car := ElectricCar()).start_engine()
+                     show_code='''(test_car := ElectricCar(30)).start_engine()
     test_car.stop_engine()'''),            
 ]}
