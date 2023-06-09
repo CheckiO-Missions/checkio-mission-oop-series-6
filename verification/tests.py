@@ -225,7 +225,8 @@ TESTS = {
     "First": [
         prepare_test(middle_code='''test_car = Car()''',
                      test="test_car.working_engine",
-                     answer=False),
+                     answer=False,
+                     show_code="test_car = Car()"),
         prepare_test(middle_code='''import contextlib, io
 with contextlib.redirect_stdout(io.StringIO()) as stdout:
     (test_car := Car()).start_engine()''',
@@ -242,7 +243,8 @@ with contextlib.redirect_stdout(io.StringIO()) as stdout:
         
         prepare_test(middle_code='''test_car = ElectricCar()''',
                      test="test_car.working_engine",
-                     answer=False),
+                     answer=False,
+                     show_code="test_car = ElectricCar()"),
         prepare_test(middle_code='''with contextlib.redirect_stdout(io.StringIO()) as stdout:
     (test_car := ElectricCar()).start_engine()''',
                      test="test_car.working_engine, stdout.getvalue()",
