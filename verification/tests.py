@@ -256,4 +256,3 @@ with contextlib.redirect_stdout(io.StringIO()) as stdout:
                      show_code='''(test_car := ElectricCar()).start_engine()
     test_car.stop_engine()'''),            
 ]}
-]}
