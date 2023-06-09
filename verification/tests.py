@@ -199,7 +199,7 @@ if not hasattr(my_electric_car2, "working_engine"):
     raise NotImplementedError("Where is 'working_engine' attribute of 'my_electric_car2' object?")
 
 if not isinstance(my_electric_car2.working_engine, str):
-    raise TypeError("'start_engine' or 'stop_engine' not called for 'my_electric_car2'")
+    raise TypeError("'start_engine' was not called for 'my_electric_car2'")
 
 if my_electric_car2.working_engine != "No":
     raise Warning("'my_electric_car2' has not been stopped")
