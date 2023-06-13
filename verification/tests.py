@@ -129,10 +129,6 @@ if not issubclass(ElectricCar, Car):
 if not '__init__' in vars(ElectricCar):
     raise NotImplementedError("Where is '__init__' method of 'ElectricCar'?")
 
-params4 = signature(ElectricCar.__init__).parameters
-if not all((len(params4) ==  4, 'self' in params4, 'brand' in params4, 'model' in params4, 'battery_capacity' in params4)):
-    raise NotImplementedError("Check the number and names of '__init__' arguments of 'ElectricCar'")
-
 if not "my_electric_car" in USER_GLOBAL:
     raise NotImplementedError("Where is 'my_electric_car'?")
 
@@ -141,11 +137,23 @@ my_electric_car = USER_GLOBAL['my_electric_car']
 if not isinstance(my_electric_car, ElectricCar):
     raise TypeError("'my_electric_car' should be an instance of 'ElectricCar' class")
 
+if not hasattr(my_electric_car, 'battery_capacity'):
+    raise NotImplementedError("Where is 'battery_capacity' attribute of 'my_electric_car' object?")
+
+if not isinstance(my_electric_car.battery_capacity, int):
+    raise TypeError("'battery_capacity' attribute should be of type 'int'")
+
+if my_electric_car.battery_capacity != 100:
+    raise ValueError("Value of 'my_electric_car' 'battery_capacity' must be 100")
+    
 if not hasattr(my_electric_car, "brand"):
     raise NotImplementedError("Where is 'brand' attribute of 'my_electric_car' object?")
     
 if not isinstance(my_electric_car.brand, str):
     raise TypeError("'brand' attribute should be of type 'str'")
+
+if my_electric_car.brand != "Tesla":
+    raise ValueError("Value of 'my_electric_car' 'brand' must be 'Tesla'")
 
 if not hasattr(my_electric_car, "model"):
     raise NotImplementedError("Where is 'model' attribute of 'my_electric_car' object?")
@@ -153,20 +161,14 @@ if not hasattr(my_electric_car, "model"):
 if not isinstance(my_electric_car.model, str):
     raise TypeError("'model' attribute should be of type 'str'")
 
-if not hasattr(my_electric_car, 'battery_capacity'):
-    raise NotImplementedError("Where is 'battery_capacity' attribute of 'my_electric_car' object?")
-
-if not isinstance(my_electric_car.battery_capacity, int):
-    raise TypeError("'battery_capacity' attribute should be of type 'int'")
+if my_electric_car.model != "Model 3":
+    raise ValueError("Value of 'my_electric_car' 'model' must be 'Model 3'")
 
 if not hasattr(my_electric_car, "working_engine"):
     raise NotImplementedError("Where is 'working_engine' attribute of 'my_electric_car' object?")
 
-
-if not isinstance(my_electric_car.working_engine, str):
-    raise TypeError("'start_engine' was not overridden or called for 'my_electric_car'")
-
-if my_electric_car.working_engine != "Yes":
+    
+if my_electric_car.working_engine != True:
     raise Warning("'my_electric_car' has not been started")
 
 if not "my_electric_car2" in USER_GLOBAL:
@@ -177,11 +179,23 @@ my_electric_car2 = USER_GLOBAL['my_electric_car2']
 if not isinstance(my_electric_car2, ElectricCar):
     raise TypeError("'my_electric_car2' should be an instance of 'ElectricCar' class")
 
+if not hasattr(my_electric_car2, 'battery_capacity'):
+    raise NotImplementedError("Where is 'battery_capacity' attribute of 'my_electric_car2' object?")
+
+if not isinstance(my_electric_car2.battery_capacity, int):
+    raise TypeError("'battery_capacity' attribute should be of type 'int'")
+
+if my_electric_car2.battery_capacity != 60:
+    raise ValueError("Value of 'my_electric_car2' 'battery_capacity' must be 60")
+    
 if not hasattr(my_electric_car2, "brand"):
     raise NotImplementedError("Where is 'brand' attribute of 'my_electric_car2' object?")
     
 if not isinstance(my_electric_car2.brand, str):
     raise TypeError("'brand' attribute should be of type 'str'")
+
+if my_electric_car2.brand != "Toyota":
+    raise ValueError("Value of 'my_electric_car2' 'brand' must be 'Toyota'")
 
 if not hasattr(my_electric_car2, "model"):
     raise NotImplementedError("Where is 'model' attribute of 'my_electric_car2' object?")
@@ -189,19 +203,13 @@ if not hasattr(my_electric_car2, "model"):
 if not isinstance(my_electric_car2.model, str):
     raise TypeError("'model' attribute should be of type 'str'")
 
-if not hasattr(my_electric_car2, 'battery_capacity'):
-    raise NotImplementedError("Where is 'battery_capacity' attribute of 'my_electric_car2' object?")
-
-if not isinstance(my_electric_car2.battery_capacity, int):
-    raise TypeError("'battery_capacity' attribute should be of type 'int'")
+if my_electric_car2.model != "Prius":
+    raise ValueError("Value of 'my_electric_car2' 'model' must be 'Prius'")
 
 if not hasattr(my_electric_car2, "working_engine"):
     raise NotImplementedError("Where is 'working_engine' attribute of 'my_electric_car2' object?")
 
-if not isinstance(my_electric_car2.working_engine, str):
-    raise TypeError("'start_engine' was not called for 'my_electric_car2'")
-
-if my_electric_car2.working_engine != "No":
+if my_electric_car2.working_engine != False:
     raise Warning("'my_electric_car2' has not been stopped")
 """
 
@@ -248,13 +256,13 @@ with contextlib.redirect_stdout(io.StringIO()) as stdout:
         prepare_test(middle_code='''with contextlib.redirect_stdout(io.StringIO()) as stdout:
     (test_car := ElectricCar(30)).start_engine()''',
                      test="test_car.working_engine, stdout.getvalue()",
-                     answer=["Yes", "Electric motor has started\n"],
+                     answer=[True, "Electric motor has started\n"],
                      show_code="(test_car := ElectricCar(30)).start_engine()"),
         prepare_test(middle_code='''with contextlib.redirect_stdout(io.StringIO()) as stdout:
     (test_car := ElectricCar(30)).start_engine()
     test_car.stop_engine()''',
                      test="test_car.working_engine, stdout.getvalue()",
-                     answer=["No", "Electric motor has started\nElectric motor has stopped\n"],
+                     answer=[False, "Electric motor has started\nElectric motor has stopped\n"],
                      show_code='''(test_car := ElectricCar(30)).start_engine()
     test_car.stop_engine()'''),            
 ]}
